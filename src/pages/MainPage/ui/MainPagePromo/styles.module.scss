@@ -1,0 +1,47 @@
+@import 'src/app/styles/variables';
+
+.MainPagePromo {
+  text-align: center;
+  padding-top: 20px;
+
+  &__title {
+    font-size: 34px;
+  }
+
+  &__subtitle {
+    color: $common-subtitle-color;
+    margin-top: 10px;
+  }
+
+  &__btns {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  &__icons {
+    margin: 20px auto;
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+
+    &__icon {
+
+      &_img {
+        height: 40px;
+      }
+
+      &_text {
+        line-height: 12px;
+      }
+    }
+  }
+
+  &__divider {
+    height: 4px;
+    width: 300px;
+    background-color: $font-hover-color;
+    margin: 30px auto 0 auto;
+    border-radius: 4px;
+  }
+}

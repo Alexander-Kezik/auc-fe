@@ -1,0 +1,12 @@
+@import 'src/app/styles/mixins';
+@import 'src/app/styles/variables';
+
+.SignUpBtn {
+  @include main-btn;
+  background-color: $violet-button-color;
+  margin-right: 0;
+
+  &:hover {
+    box-shadow: 0 0 15px 0 $violet-button-shine-color;
+  }
+}

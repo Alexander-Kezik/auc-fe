@@ -1,0 +1,39 @@
+@import 'src/app/styles/variables';
+
+@mixin main-btn {
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: .3s all;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+@mixin nav-link {
+  color: $white-text-color;
+  position: relative;
+  text-decoration: none;
+  transition: .3s all;
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: $font-hover-color;
+    transition: width 0.3s ease-out;
+  }
+}
+
+@mixin nav-link-animations {
+  &:hover:after {
+    width: 100%;
+  }
+
+  &:hover {
+    color: $font-hover-color;
+  }
+}

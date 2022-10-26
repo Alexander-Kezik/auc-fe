@@ -1,0 +1,10 @@
+@import 'src/app/styles/variables';
+
+.LotItemSkeleton {
+  box-shadow: 2px 2px 2px 2px $lot-shadow-color;
+  padding: 10px;
+  border-radius: 5px;
+  list-style-type: none;
+  cursor: not-allowed;
+  transition: .3s all;
+}

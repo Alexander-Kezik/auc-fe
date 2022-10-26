@@ -1,0 +1,56 @@
+@import 'src/app/styles/variables';
+
+.Footer {
+  background-color: $aside-background-color;
+  padding: 20px 0 10px 0;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+  }
+
+  &__socials {
+    padding-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 35px;
+
+    &__item {
+      margin: 0 auto;
+      font-size: 30px;
+      cursor: pointer;
+      color: $white-text-color;
+      transition: .3s all;
+
+      &:hover {
+        color: $font-hover-color;
+      }
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 200px;
+
+    &__links {
+      display: flex;
+      flex-direction: column;
+
+      &__header {
+        margin-bottom: 15px;
+        color: $white-text-color;
+      }
+
+      &__link {
+        color: $white-text-color;
+        text-decoration: none;
+        transition: .3s all;
+
+        &:hover {
+          color: $font-hover-color;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@import 'src/app/styles/mixins';
+@import 'src/app/styles/variables';
+
+.SignInBtn {
+  @include main-btn;
+  background-color: $green-button-color;
+  margin-right: 20px;
+
+  &:hover {
+    box-shadow: 0 0 15px 0 $green-button-shine-color;
+  }
+}

@@ -1,0 +1,38 @@
+@import 'src/app/styles/variables';
+
+.LotItem {
+  border: 2px solid $lot-shadow-color;
+  box-shadow: 2px 2px 2px 2px $lot-shadow-color;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .3s all;
+
+  &:hover {
+    box-shadow: 4px 4px 4px 4px $lot-shadow-color;
+    transform: scale(1.05);
+  }
+
+  &__img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    margin-bottom: 10px;
+    height: 200px;
+    overflow: hidden;
+
+    &_item {
+      width: 100%;
+    }
+
+    &.big {
+      height: 300px;
+    }
+  }
+
+  &__text {
+    color: $lot-text-color;
+  }
+}

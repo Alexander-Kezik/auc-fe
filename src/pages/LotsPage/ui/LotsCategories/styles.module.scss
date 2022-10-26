@@ -1,0 +1,34 @@
+@import 'src/app/styles/variables';
+@import 'src/app/styles/mixins';
+
+.LotsCategories {
+  padding: 20px;
+  background-color: $aside-background-color;
+  border-top: 1px solid $font-hover-color;
+
+  &__error {
+    color: $white-text-color;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+
+    &__param {
+      @include nav-link;
+      @include nav-link-animations;
+      list-style-type: none;
+      cursor: pointer;
+      margin-right: 50px;
+
+      &.active {
+        @include nav-link;
+        color: $font-hover-color;
+
+        &:after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

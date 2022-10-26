@@ -1,0 +1,171 @@
+$white: #FCFCFC;
+$gray: #CBCDD3;
+$dark: #777777;
+$error: #EF8D9C;
+$orange: #FFC39E;
+$success: #B0DB7D;
+$secondary: #99DBB4;
+
+.ErrorMessage {
+  position: relative;
+  margin: 20px auto 50px auto;
+  width: 370px;
+  height: 378px;
+  background: linear-gradient(to bottom left, $error 40%, $orange 100%);
+  border-radius: 20px;
+  box-shadow: 5px 5px 20px rgba($gray, 10%);
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    background: $white;
+    border-radius: 50%;
+    position: absolute;
+    top: 4%;
+    right: 6%;
+
+    &:hover {
+      background: darken($white, 20%);
+    }
+  }
+
+  &__two {
+    right: 12%;
+    opacity: .5;
+  }
+
+  &__face {
+    position: absolute;
+    width: 22%;
+    height: 22%;
+    background: $white;
+    border-radius: 50%;
+    border: 1px solid $dark;
+    top: 21%;
+    left: 37.5%;
+    z-index: 2;
+    animation: roll 3s ease-in-out infinite;
+
+    &__eye {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: $dark;
+      border-radius: 50%;
+      top: 40%;
+      left: 20%;
+    }
+
+    &__mouth {
+      position: absolute;
+      left: 41%;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      top: 49%;
+      border: 2px solid;
+      border-color: $dark transparent transparent $dark;
+      transform: rotate(45deg);
+    }
+  }
+
+  &__shadow {
+    position: absolute;
+    width: 21%;
+    height: 3%;
+    opacity: .5;
+    background: $dark;
+    left: 40%;
+    top: 43%;
+    border-radius: 50%;
+    z-index: 1;
+    animation: move 3s ease-in-out infinite;
+  }
+
+  &__message {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    height: 40%;
+    top: 47%;
+
+    &_title {
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      padding-top: 5px;
+      color: $white;
+      padding-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    &_text {
+      margin-top: -5px;
+      font-size: 12px;
+      font-weight: 300;
+      color: darken($dark, 10%);
+      letter-spacing: 1px;
+    }
+  }
+
+  &__button {
+    position: absolute;
+    background: $white;
+    width: 50%;
+    height: 15%;
+    border-radius: 20px;
+    top: 73%;
+    left: 25%;
+    outline: 0;
+    border: none;
+    box-shadow: 2px 2px 10px rgba($dark, .5);
+    transition: all .5s ease-in-out;
+    color: darken($error, 10%);
+    cursor: pointer;
+
+    &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+  }
+}
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes scale {
+  50% {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes roll {
+  0% {
+    transform: rotate(0deg);
+    left: 25%;
+  }
+  50% {
+    left: 60%;
+    transform: rotate(168deg);
+  }
+  100% {
+    transform: rotate(0deg);
+    left: 25%;
+  }
+}
+
+@keyframes move {
+  0% {
+    left: 25%;
+  }
+  50% {
+    left: 60%;
+  }
+  100% {
+    left: 25%;
+  }
+}
