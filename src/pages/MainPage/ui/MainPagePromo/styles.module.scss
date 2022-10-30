@@ -13,10 +13,13 @@
     margin-top: 10px;
   }
 
-  &__btns {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+  &__support {
+    margin-top: 15px;
+    background-color: $orange-button-color;
+
+    &:hover {
+      box-shadow: 0 0 15px 0 $orange-button-shine-color;
+    }
   }
 
   &__icons {

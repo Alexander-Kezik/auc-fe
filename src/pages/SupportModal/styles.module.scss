@@ -1,0 +1,35 @@
+@import '/src/app/styles/variables';
+
+.SupportModal {
+  z-index: 10000;
+  display: block;
+  width: 500px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  padding: 20px;
+  background-color: $white-text-color;
+  border-radius: 8px;
+  border: 1px solid $black-text-color;
+
+  &__bg {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .5);
+  }
+
+  &__btn {
+    margin: 15px auto 0 auto;
+    background-color: $green-button-color;
+    display: block;
+
+    &:hover {
+      box-shadow: 0 0 15px 0 $green-button-shine-color;
+    }
+  }
+}

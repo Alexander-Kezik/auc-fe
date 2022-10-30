@@ -2,9 +2,8 @@ import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
-import SignInBtn from './ui/SignInBtn';
-import SignUpBtn from './ui/SignUpBtn';
 import { Routes as Paths } from 'shared/configs/routes';
+import MainButton from 'shared/ui/MainButton';
 
 import styles from './styles.module.scss';
 
@@ -35,8 +34,8 @@ const NavBar: FC = () => {
 					</NavLink>
 					<ul className={styles.NavBar__links}>{navLinks}</ul>
 					<div className={styles.NavBar__btns}>
-						<SignInBtn />
-						<SignUpBtn />
+						<MainButton className={styles.NavBar__btns_signin}>Sign In</MainButton>
+						<MainButton className={styles.NavBar__btns_signup}>Sign Up</MainButton>
 					</div>
 				</div>
 			</div>

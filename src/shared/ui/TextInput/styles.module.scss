@@ -1,0 +1,39 @@
+@import '/src/app/styles/variables';
+
+.TextInput {
+  &__label {
+    display: block;
+    font-weight: 800;
+    font-size: 0.75rem;
+    line-height: 22px;
+  }
+  &__wrapper {
+    position: relative;
+  }
+  &__input {
+    display: block;
+    margin-bottom: 10px;
+    padding: 15px 16px;
+    border-radius: 8px;
+    width: 100%;
+    font-weight: 700;
+    line-height: 1.25rem;
+    border: 1px solid #DDDDDD;
+    font-size: 1rem;
+    &.error {
+      border: 1px solid red;
+    }
+  }
+  &__error {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    border-radius: 100%;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1.6rem;
+  }
+}

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import MainPagePromo from './ui/MainPagePromo';
 
@@ -11,6 +12,7 @@ const MainPage: FC = () => {
 			<MainPagePromo />
 			<h2 className={styles.MainPage__random}>Random lots: </h2>
 			<LotsList isRandomList={true} />
+			<Outlet />
 		</>
 	);
 };

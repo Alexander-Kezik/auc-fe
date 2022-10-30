@@ -1,5 +1,4 @@
 @import 'src/app/styles/variables';
-@import 'src/app/styles/mixins';
 
 .SingleLotPage {
   padding: 50px 0;
@@ -51,7 +50,6 @@
       margin-top: 20px;
 
       &_inc {
-        @include main-btn;
         background-color: $green-button-color;
 
         &:hover {
@@ -60,7 +58,6 @@
       }
 
       &_buy {
-        @include main-btn;
         background-color: $orange-button-color;
 
         &:hover {

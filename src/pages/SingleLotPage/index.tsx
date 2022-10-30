@@ -8,9 +8,11 @@ import ErrorMessage from 'shared/ui/ErrorMessage';
 import LotItemSkeleton from 'shared/ui/LotItemSkeleton';
 import LotItem from 'shared/ui/LotsList/ui/LotItem';
 import { Routes as Paths } from 'shared/configs/routes';
-import { diffDatesAndFindTime } from 'shared/helpers/dateHelpers';
+import AuctionTimer from 'shared/ui/AuctionTimer';
+import { Lot } from 'shared/types/lot';
 
 import styles from './styles.module.scss';
+import MainButton from '../../shared/ui/MainButton';
 
 const SingleLotPage: FC = () => {
 	const { lotId } = useParams<{ lotId: string }>();
@@ -36,7 +38,7 @@ const SingleLotPage: FC = () => {
 		) : loadingState === LoadingState.LOADING ? (
 			<LotItemSkeleton count={1} imgHeight={300} />
 		) : (
-			<LotItem isSingle={true} lot={lot} />
+			<View lotItem={lot} lotOwner={username} />
 		);
 
 	return (
@@ -45,32 +47,44 @@ const SingleLotPage: FC = () => {
 				Go back
 			</NavLink>
 			<div className='container'>
-				<div className={styles.SingleLotPage__wrapper}>
-					{content}
-					<div className={styles.SingleLotPage__info}>
-						<h3 className={styles.SingleLotPage__info__owner}>
-							Lot owner:{' '}
-							<span className={styles.SingleLotPage__info__owner_username}>{username}</span>
-						</h3>
-						<p className={styles.SingleLotPage__info__descr}>
-							Minimum increase stake:{' '}
-							<span className={styles.SingleLotPage__info__descr_amount}>
-								{lot.startPrice * 0.1}$
-							</span>
-							<p className={styles.SingleLotPage__info__descr_time}>
-								Time left: {diffDatesAndFindTime(lot.endDate, new Date())}
-							</p>
-						</p>
-						<div className={styles.SingleLotPage__info__actions}>
-							<button className={styles.SingleLotPage__info__actions_inc}>Increase</button>
-							<button className={styles.SingleLotPage__info__actions_buy}>
-								Immediate purchase
-							</button>
-						</div>
-					</div>
-				</div>
+				<div className={styles.SingleLotPage__wrapper}>{content}</div>
 			</div>
 		</section>
+	);
+};
+
+interface IViewProps {
+	lotItem: Lot;
+	lotOwner: string;
+}
+
+const View: FC<IViewProps> = ({ lotItem, lotOwner }) => {
+	const onFinishAuc = (): void => {
+		console.log('finished');
+	};
+
+	return (
+		<>
+			<LotItem lot={lotItem} isSingle={true} />
+			<div className={styles.SingleLotPage__info}>
+				<h3 className={styles.SingleLotPage__info__owner}>
+					Lot owner: <span className={styles.SingleLotPage__info__owner_username}>{lotOwner}</span>
+				</h3>
+				<p className={styles.SingleLotPage__info__descr}>
+					Minimum increase stake:{' '}
+					<span className={styles.SingleLotPage__info__descr_amount}>
+						{lotItem.startPrice * 0.1}$
+					</span>
+				</p>
+				<AuctionTimer onFinishAuc={onFinishAuc} timeFrom={lotItem.endDate} />
+				<div className={styles.SingleLotPage__info__actions}>
+					<MainButton className={styles.SingleLotPage__info__actions_inc}>Increase</MainButton>
+					<MainButton className={styles.SingleLotPage__info__actions_buy}>
+						Immediate purchase
+					</MainButton>
+				</div>
+			</div>
+		</>
 	);
 };
 

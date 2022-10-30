@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import SignUpBtn from 'shared/ui/NavBar/ui/SignUpBtn';
+import MainButton from 'shared/ui/MainButton';
+import { Routes as Paths } from 'shared/configs/routes';
 
 import styles from './styles.module.scss';
-import SignInBtn from 'shared/ui/NavBar/ui/SignInBtn';
 
 import safeIcon from 'shared/assets/icons/safe.png';
 import fastIcon from 'shared/assets/icons/fast.png';
@@ -14,11 +15,10 @@ const MainPagePromo: FC = () => {
 		<header className={styles.MainPagePromo}>
 			<div className='container'>
 				<h1 className={styles.MainPagePromo__title}>Begin buying and selling right now!</h1>
-				<h2 className={styles.MainPagePromo__subtitle}>Please, Sign In or Sign Up</h2>
-				<div className={styles.MainPagePromo__btns}>
-					<SignInBtn />
-					<SignUpBtn />
-				</div>
+				<h2 className={styles.MainPagePromo__subtitle}>Write to us if you have any questions</h2>
+				<NavLink to={Paths.SUPPORT}>
+					<MainButton className={styles.MainPagePromo__support}>Write to us</MainButton>
+				</NavLink>
 				<div className={styles.MainPagePromo__icons}>
 					<div className={styles.MainPagePromo__icons__icon}>
 						<img className={styles.MainPagePromo__icons__icon_img} src={safeIcon} alt='safe icon' />
