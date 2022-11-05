@@ -6,4 +6,8 @@
   font-size: 16px;
   border: none;
   cursor: pointer;
+
+  &.disabled {
+    border: 5px solid black;
+  }
 }

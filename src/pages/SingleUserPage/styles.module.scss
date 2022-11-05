@@ -1,0 +1,17 @@
+@import 'src/app/styles/mixins';
+
+.SingleUserPage {
+  @include init-page-height;
+  padding: 30px 0;
+
+  &__user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__divider {
+    @include divider;
+    margin-bottom: 30px;
+  }
+}

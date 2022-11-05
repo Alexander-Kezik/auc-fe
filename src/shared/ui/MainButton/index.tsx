@@ -1,16 +1,23 @@
-import React, { ButtonHTMLAttributes, FC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 
 import styles from './styles.module.scss';
 
 interface IProps {
 	className: string;
 	children: ReactNode;
-	type?: ButtonHTMLAttributes<HTMLButtonElement>;
+	type?: string;
+	onClick?: () => any;
+	disabled?: boolean;
 }
 
-const MainButton: FC<IProps> = ({ className, children, type }) => {
+const MainButton: FC<IProps> = ({ className, children, type, onClick, ...props }) => {
 	return (
-		<button type={type ? 'button' : type} className={`${styles.MainButton} ${className}`}>
+		<button
+			onClick={onClick}
+			type={type === 'submit' ? 'submit' : 'button'}
+			className={`${styles.MainButton} ${className}`}
+			{...props}
+		>
 			{children}
 		</button>
 	);

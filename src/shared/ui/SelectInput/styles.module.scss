@@ -1,0 +1,14 @@
+.TextInput {
+  display: flex;
+  flex-direction: column;
+
+  &__select {
+    width: 150px;
+    padding: 10px;
+    border-radius: 5px;
+
+    &__option {
+      padding: 10px;
+    }
+  }
+}

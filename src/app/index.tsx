@@ -1,17 +1,37 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
-import Providers from 'app/Providers';
 import Pages from 'pages';
-import NavBar from 'shared/ui/NavBar';
+import NavBar from 'shared/ui/Navbar';
 import Footer from 'shared/ui/Footer';
+import { useAppDispatch } from 'shared/hooks/reduxAppHooks';
+import { verifyToken } from 'shared/store/slices/authSlice/thunks';
+import LoadingScreen from 'shared/ui/LoadingScreen';
+import { fetchCategories } from 'shared/store/slices/categoriesSlice/thunks';
 
 const App: FC = () => {
+	const dispatch = useAppDispatch();
+	const [isLoaded, setIsLoaded] = useState(false);
+
+	useEffect(() => {
+		(async function () {
+			await dispatch(verifyToken());
+			await dispatch(fetchCategories());
+			setIsLoaded(true);
+		})();
+	}, []);
+
 	return (
-		<Providers>
-			<NavBar />
-			<Pages />
-			<Footer />
-		</Providers>
+		<>
+			{isLoaded ? (
+				<>
+					<NavBar />
+					<Pages />
+					<Footer />
+				</>
+			) : (
+				<LoadingScreen />
+			)}
+		</>
 	);
 };
 

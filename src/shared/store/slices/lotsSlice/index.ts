@@ -1,15 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Lot } from 'shared/types/lot';
 import { LoadingState } from 'shared/enums/loadingState';
-import { fetchRandomLots, fetchLots, fetchLot } from './thunks';
-import { isErrorMatcher, isPendingMatcher } from 'shared/store/slices/matchers/matchers';
+import { fetchRandomLots, fetchLots, fetchLot, fetchLotsByEmail } from './thunks';
+import { isErrorMatcher, isPendingMatcher } from 'shared/store/matchers/matchers';
 
 type LotsState = {
 	lots: Lot[];
 	singleLot: { lot: Lot; username: string };
 	count: number;
 	loadingState: LoadingState;
+	countForPage: number;
+	lotsActivePage: number;
 };
 
 const initialState: LotsState = {
@@ -28,13 +30,19 @@ const initialState: LotsState = {
 		username: ''
 	},
 	count: 0,
-	loadingState: LoadingState.LOADING
+	countForPage: 12,
+	loadingState: LoadingState.LOADING,
+	lotsActivePage: 0
 };
 
 const lotsSlice = createSlice({
 	name: 'lots',
 	initialState,
-	reducers: {},
+	reducers: {
+		changeLotsActivePage(state, action: PayloadAction<number>) {
+			state.lotsActivePage = action.payload;
+		}
+	},
 	extraReducers: builder => {
 		builder
 			.addCase(fetchRandomLots.fulfilled, (state, action) => {
@@ -44,6 +52,10 @@ const lotsSlice = createSlice({
 			.addCase(fetchLots.fulfilled, (state, action) => {
 				state.lots = action.payload.lots;
 				state.count = action.payload.count;
+				state.loadingState = LoadingState.LOADED;
+			})
+			.addCase(fetchLotsByEmail.fulfilled, (state, action) => {
+				state.lots = action.payload;
 				state.loadingState = LoadingState.LOADED;
 			})
 			.addCase(fetchLot.fulfilled, (state, action) => {
@@ -60,5 +72,7 @@ const lotsSlice = createSlice({
 });
 
 const { actions, reducer } = lotsSlice;
+
+export const { changeLotsActivePage } = actions;
 
 export default reducer;

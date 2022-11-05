@@ -1,0 +1,24 @@
+@import 'src/app/styles/variables';
+
+.ChangeStatus {
+  display: flex;
+  justify-content: center;
+
+  &__ban {
+    background-color: $cancel-color;
+    color: $white-text-color;
+
+    &:hover {
+      box-shadow: 0 0 15px 0 $cancel-shine-color;
+    }
+  }
+
+  &__unban {
+    background-color: $green-button-color;
+    color: $white-text-color;
+
+    &:hover {
+      box-shadow: 0 0 15px 0 $green-button-shine-color;
+    }
+  }
+}

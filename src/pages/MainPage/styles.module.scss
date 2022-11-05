@@ -1,4 +1,8 @@
+@import 'src/app/styles/mixins';
+
 .MainPage {
+  @include init-page-height;
+  padding: 30px;
 
   &__random {
     text-align: center;

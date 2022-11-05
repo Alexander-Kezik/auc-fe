@@ -1,7 +1,24 @@
+@import 'src/app/styles/variables';
+
 .LotsList {
   padding: 20px 0 50px 0;
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-auto-rows: auto;
   gap: 20px;
+
+  &__sorters {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    padding: 20px 0;
+  }
+
+  &__notfound {
+    text-align: center;
+    margin: 50px 0;
+    color: $cancel-color;
+    text-decoration: underline;
+  }
 }

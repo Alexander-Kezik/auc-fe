@@ -5,28 +5,36 @@ import ReactTooltip from 'react-tooltip';
 
 import styles from './styles.module.scss';
 
-interface TextInputProps {
-	label: string;
+interface IProps {
+	label?: string;
 	id: string;
 	name: string;
 	placeholder: string;
 	type?: string;
+	autoComplete?: string;
+	className?: string;
 }
 
-const TextInput: FC<TextInputProps> = ({ label, ...props }) => {
+const TextInput: FC<IProps> = ({ label, className, ...props }) => {
 	const cn = classNames.bind(styles);
 	const [field, meta] = useField(props);
 
 	return (
 		<>
-			<label className={styles.TextInput__label} htmlFor={props.name}>
-				{label}:
-			</label>
+			{label && (
+				<label className={styles.TextInput__label} htmlFor={props.name}>
+					{label}:
+				</label>
+			)}
 			<div className={styles.TextInput__wrapper}>
 				<input
 					{...props}
 					{...field}
-					className={cn(styles.TextInput__input, { ['error']: meta.touched && meta.error })}
+					className={cn(
+						styles.TextInput__input,
+						{ ['error']: meta.touched && meta.error },
+						{ ['' + className]: className }
+					)}
 				/>
 				{meta.touched && meta.error && (
 					<>

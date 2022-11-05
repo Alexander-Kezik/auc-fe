@@ -1,8 +1,8 @@
 @import 'src/app/styles/variables';
+@import 'src/app/styles/mixins';
 
 .MainPagePromo {
   text-align: center;
-  padding-top: 20px;
 
   &__title {
     font-size: 34px;
@@ -16,6 +16,7 @@
   &__support {
     margin-top: 15px;
     background-color: $orange-button-color;
+    color: $white-text-color;
 
     &:hover {
       box-shadow: 0 0 15px 0 $orange-button-shine-color;
@@ -41,10 +42,6 @@
   }
 
   &__divider {
-    height: 4px;
-    width: 300px;
-    background-color: $font-hover-color;
-    margin: 30px auto 0 auto;
-    border-radius: 4px;
+    @include divider;
   }
 }

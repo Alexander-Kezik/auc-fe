@@ -1,0 +1,30 @@
+@import 'src/app/styles/variables';
+@import 'src/app/styles/mixins';
+
+.NotFoundPage {
+  margin: 20px 0;
+  text-align: center;
+  @include init-page-height;
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  &__message {
+    margin: 20px 0;
+  }
+
+  &__link {
+    color: $black-text-color;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: .3s all;
+    text-decoration: underline;
+
+    &:hover {
+      color: $font-hover-color;
+    }
+  }
+}

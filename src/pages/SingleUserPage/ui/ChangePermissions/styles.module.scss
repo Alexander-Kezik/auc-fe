@@ -1,0 +1,27 @@
+@import 'src/app/styles/variables';
+
+.ChangePermissions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+
+  &__give {
+    background-color: $green-button-color;
+    margin: 0 20px;
+    color: $white-text-color;
+
+    &:hover {
+      box-shadow: 0 0 15px 0 $green-button-shine-color;
+    }
+  }
+
+  &__retrieve {
+    background-color: $cancel-color;
+    color: $white-text-color;
+
+    &:hover {
+      box-shadow: 0 0 15px 0 $cancel-shine-color;
+    }
+  }
+}

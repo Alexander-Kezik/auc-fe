@@ -1,0 +1,22 @@
+@import 'src/app/styles/mixins';
+@import 'src/app/styles/variables';
+
+.ProfilePage {
+  @include init-page-height;
+  padding: 30px 0;
+
+  &__edit {
+    display: block;
+    margin: 20px auto;
+    background-color: $orange-button-color;
+    color: $white-text-color;
+
+    &:hover {
+      box-shadow: 0 0 15px 0 $orange-button-shine-color;
+    }
+  }
+
+  &__divider {
+    @include divider;
+  }
+}

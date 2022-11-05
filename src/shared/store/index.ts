@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import lotsReducer from 'shared/store/slices/lotsSlice';
-import categoriesReducer from 'shared/store/slices/categoriesSlice';
+import lots from 'shared/store/slices/lotsSlice';
+import categories from 'shared/store/slices/categoriesSlice';
+import users from 'shared/store/slices/usersSlice';
+import auth from 'shared/store/slices/authSlice';
 
 const store = configureStore({
-	reducer: { lots: lotsReducer, categories: categoriesReducer },
+	reducer: { lots, categories, users, auth },
 	devTools: process.env.NODE_ENV !== 'production'
 });
 

@@ -1,18 +1,20 @@
-import React, { FC, useEffect } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import React, { FC, useEffect, useState } from 'react';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
+import classNames from 'classnames/bind';
 
 import { useAppDispatch, useAppSelector } from 'shared/hooks/reduxAppHooks';
 import { fetchLot } from 'shared/store/slices/lotsSlice/thunks';
 import { LoadingState } from 'shared/enums/loadingState';
 import ErrorMessage from 'shared/ui/ErrorMessage';
-import LotItemSkeleton from 'shared/ui/LotItemSkeleton';
+import LotItemSkeleton from 'shared/ui/Skeletons/LotItemSkeleton';
 import LotItem from 'shared/ui/LotsList/ui/LotItem';
 import { Routes as Paths } from 'shared/configs/routes';
 import AuctionTimer from 'shared/ui/AuctionTimer';
 import { Lot } from 'shared/types/lot';
+import MainButton from 'shared/ui/MainButton';
+import { compareWithCurrentDate } from 'shared/helpers/dateHelpers';
 
 import styles from './styles.module.scss';
-import MainButton from '../../shared/ui/MainButton';
 
 const SingleLotPage: FC = () => {
 	const { lotId } = useParams<{ lotId: string }>();
@@ -22,20 +24,16 @@ const SingleLotPage: FC = () => {
 		loadingState
 	} = useAppSelector(state => state.lots);
 
-	const onFetchLot = (): void => {
-		dispatch(fetchLot(String(lotId)));
-	};
-
 	useEffect(() => {
-		onFetchLot();
+		dispatch(fetchLot(String(lotId)));
 	}, []);
 
 	const content =
 		loadingState === LoadingState.ERROR ? (
 			<h2 className={styles.SingleLotPage__error}>
-				<ErrorMessage retry={onFetchLot} />
+				<ErrorMessage retry={() => dispatch(fetchLot(String(lotId)))} />
 			</h2>
-		) : loadingState === LoadingState.LOADING ? (
+		) : loadingState === LoadingState.LOADING || !username ? (
 			<LotItemSkeleton count={1} imgHeight={300} />
 		) : (
 			<View lotItem={lot} lotOwner={username} />
@@ -49,6 +47,7 @@ const SingleLotPage: FC = () => {
 			<div className='container'>
 				<div className={styles.SingleLotPage__wrapper}>{content}</div>
 			</div>
+			<Outlet />
 		</section>
 	);
 };
@@ -59,9 +58,8 @@ interface IViewProps {
 }
 
 const View: FC<IViewProps> = ({ lotItem, lotOwner }) => {
-	const onFinishAuc = (): void => {
-		console.log('finished');
-	};
+	const [isEnded, setIsEnded] = useState<boolean>(!compareWithCurrentDate(lotItem.endDate));
+	const cn = classNames.bind(styles);
 
 	return (
 		<>
@@ -76,10 +74,20 @@ const View: FC<IViewProps> = ({ lotItem, lotOwner }) => {
 						{lotItem.startPrice * 0.1}$
 					</span>
 				</p>
-				<AuctionTimer onFinishAuc={onFinishAuc} timeFrom={lotItem.endDate} />
+				<AuctionTimer onFinish={() => setIsEnded(true)} timeFrom={new Date('11-4-2022 13:59:22')} />
 				<div className={styles.SingleLotPage__info__actions}>
-					<MainButton className={styles.SingleLotPage__info__actions_inc}>Increase</MainButton>
-					<MainButton className={styles.SingleLotPage__info__actions_buy}>
+					<MainButton
+						className={cn(styles.SingleLotPage__info__actions_inc, {
+							['disabled']: isEnded
+						})}
+						disabled={isEnded}
+					>
+						Increase
+					</MainButton>
+					<MainButton
+						className={cn(styles.SingleLotPage__info__actions_buy, { ['disabled']: isEnded })}
+						disabled={isEnded}
+					>
 						Immediate purchase
 					</MainButton>
 				</div>

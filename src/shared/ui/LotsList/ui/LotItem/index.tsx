@@ -18,7 +18,7 @@ const LotItem: FC<IProps> = ({ lot, isSingle }) => {
 	const { id, lotName, startPrice, currentPrice, immediatePurchasePrice, startDate, endDate } = lot;
 
 	return (
-		<NavLink to={`${Paths.LOTS}/${id}`} tabIndex={1} className={styles.LotItem}>
+		<NavLink to={`${Paths.LOTS}/lot/${id}`} tabIndex={1} className={styles.LotItem}>
 			<div className={cn(styles.LotItem__img, { ['big']: isSingle })}>
 				<img
 					className={styles.LotItem__img_item}

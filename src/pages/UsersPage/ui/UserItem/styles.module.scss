@@ -1,0 +1,16 @@
+@import 'src/app/styles/variables';
+
+.UserItem {
+  padding: 10px;
+  border: 2px solid $lot-shadow-color;
+  box-shadow: 2px 2px 2px 2px $lot-shadow-color;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: .3s all;
+  color: $black-text-color;
+  text-decoration: none;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

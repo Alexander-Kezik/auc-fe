@@ -1,24 +1,35 @@
 import React, { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import { Routes as Paths } from 'shared/configs/routes';
 import MainButton from 'shared/ui/MainButton';
+import { useAppSelector } from 'shared/hooks/reduxAppHooks';
+import Balance from './ui/Balance';
 
 import styles from './styles.module.scss';
 
 import aucHammer from 'shared/assets/icons/auc-hammer.png';
 
-const NavBar: FC = () => {
+const Navbar: FC = () => {
 	const cn = classNames.bind(styles);
-	const navLinks = ['Profile', 'Lots', 'Language'].map(item => {
+	const {
+		user: { email }
+	} = useAppSelector(state => state.auth);
+	const navigate = useNavigate();
+
+	const navLinks = [
+		['profile', `${Paths.PROFILE}/${email}`],
+		['lots', Paths.LOTS],
+		['users', Paths.USERS]
+	].map(item => {
 		return (
-			<li className={styles.NavBar__links__item} key={item}>
+			<li className={styles.NavBar__links__item} key={item[0]}>
 				<NavLink
 					className={({ isActive }) => cn(styles.NavBar__links__link, { ['active']: isActive })}
-					to={item.toLocaleLowerCase()}
+					to={item[1]}
 				>
-					{item}
+					{item[0][0].toUpperCase() + item[0].slice(1)}
 				</NavLink>
 			</li>
 		);
@@ -34,13 +45,24 @@ const NavBar: FC = () => {
 					</NavLink>
 					<ul className={styles.NavBar__links}>{navLinks}</ul>
 					<div className={styles.NavBar__btns}>
-						<MainButton className={styles.NavBar__btns_signin}>Sign In</MainButton>
-						<MainButton className={styles.NavBar__btns_signup}>Sign Up</MainButton>
+						<MainButton
+							onClick={() => navigate(Paths.SIGNIN)}
+							className={styles.NavBar__btns_signin}
+						>
+							Sign In
+						</MainButton>
+						<MainButton
+							onClick={() => navigate(Paths.SIGNUP)}
+							className={styles.NavBar__btns_signup}
+						>
+							Sign Up
+						</MainButton>
 					</div>
 				</div>
 			</div>
+			<Balance />
 		</nav>
 	);
 };
 
-export default NavBar;
+export default Navbar;

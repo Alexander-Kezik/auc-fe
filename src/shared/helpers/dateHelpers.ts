@@ -7,19 +7,6 @@ export const convertDateToString = (date: Date | string): string => {
 	return `${year}.${month}.${day}`;
 };
 
-export const diffDatesAndFindTime = (
-	firstDate: Date | string,
-	secondDate: Date | string
-): string => {
-	const newFirstDate = new Date(firstDate);
-	const newSecondDate = new Date(secondDate);
-
-	const diff = newFirstDate.getTime() - newSecondDate.getTime();
-
-	const seconds = Math.floor((diff / 1000) % 60);
-	const minutes = Math.floor((diff / (1000 * 60)) % 60);
-	const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-	const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 30);
-
-	return `${days}:${hours}:${minutes}:${seconds}`;
+export const compareWithCurrentDate = (firstDate: Date | string): boolean => {
+	return new Date(firstDate).getTime() > new Date().getTime();
 };

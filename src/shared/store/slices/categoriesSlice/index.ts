@@ -3,18 +3,15 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Category } from 'shared/types/category';
 import { LoadingState } from 'shared/enums/loadingState';
 import { fetchCategories } from './thunks';
-import { isErrorMatcher, isPendingMatcher } from 'shared/store/slices/matchers/matchers';
 
-export {};
-
-type CategoriesState = {
+export type CategoriesState = {
 	categories: Category[];
-	loadingState: LoadingState;
+	categoriesLoadingState: LoadingState;
 };
 
 const initialState: CategoriesState = {
 	categories: [],
-	loadingState: LoadingState.LOADING
+	categoriesLoadingState: LoadingState.LOADING
 };
 
 const categoriesSlice = createSlice({
@@ -24,14 +21,14 @@ const categoriesSlice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addCase(fetchCategories.fulfilled, (state, action) => {
-				state.loadingState = LoadingState.LOADED;
+				state.categoriesLoadingState = LoadingState.LOADED;
 				state.categories = action.payload;
 			})
-			.addMatcher(isPendingMatcher, state => {
-				state.loadingState = LoadingState.LOADING;
+			.addCase(fetchCategories.pending, state => {
+				state.categoriesLoadingState = LoadingState.LOADING;
 			})
-			.addMatcher(isErrorMatcher, state => {
-				state.loadingState = LoadingState.ERROR;
+			.addCase(fetchCategories.rejected, state => {
+				state.categoriesLoadingState = LoadingState.ERROR;
 			});
 	}
 });

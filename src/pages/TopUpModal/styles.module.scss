@@ -1,0 +1,14 @@
+@import 'src/app/styles/mixins';
+@import 'src/app/styles/variables';
+
+.TopUpModal {
+  @include modal-window;
+
+  &__btn {
+    background-color: $green-button-color;
+
+    &:hover {
+      box-shadow: 0 0 15px 0 $green-button-shine-color;
+    }
+  }
+}

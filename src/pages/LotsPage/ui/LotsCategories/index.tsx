@@ -1,40 +1,34 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import classNames from 'classnames/bind';
 
-import { useAppDispatch, useAppSelector } from 'shared/hooks/reduxAppHooks';
-import { fetchCategories } from 'shared/store/slices/categoriesSlice/thunks';
+import { useAppSelector } from 'shared/hooks/reduxAppHooks';
 import { LoadingState } from 'shared/enums/loadingState';
 import { Category } from 'shared/types/category';
+import Search from 'shared/ui/Search';
 
 import styles from './styles.module.scss';
-import { Skeleton } from '@mui/material';
 
 const LotsCategories: FC = () => {
-	const dispatch = useAppDispatch();
-	const { categories, loadingState } = useAppSelector(state => state.categories);
-
-	useEffect(() => {
-		dispatch(fetchCategories());
-	}, []);
+	const { categories, categoriesLoadingState } = useAppSelector(state => state.categories);
+	const { loadingState } = useAppSelector(state => state.lots);
 
 	const content =
-		loadingState === LoadingState.ERROR ? (
+		categoriesLoadingState === LoadingState.ERROR ? (
 			<h2 className={styles.LotsCategories__error}>
 				Error... Can&#39;t load categories from server...
 			</h2>
 		) : (
-			<div className={styles.LotsList}>
-				{loadingState === LoadingState.LOADING ? (
-					<Skeleton sx={{ bgcolor: '#ffffff' }} />
-				) : (
-					<View categories={categories} />
-				)}
-			</div>
+			<View categories={categories} />
 		);
 
 	return (
 		<aside className={styles.LotsCategories}>
-			<div className='container'>{content}</div>
+			<div className='container'>
+				<div className={styles.LotsCategories__flex}>
+					{content}
+					{loadingState === LoadingState.LOADED && <Search />}
+				</div>
+			</div>
 		</aside>
 	);
 };

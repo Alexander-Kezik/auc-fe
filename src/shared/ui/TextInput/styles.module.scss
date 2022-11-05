@@ -1,15 +1,18 @@
 @import '/src/app/styles/variables';
 
 .TextInput {
+
   &__label {
     display: block;
     font-weight: 800;
     font-size: 0.75rem;
     line-height: 22px;
   }
+
   &__wrapper {
     position: relative;
   }
+
   &__input {
     display: block;
     margin-bottom: 10px;
@@ -18,18 +21,21 @@
     width: 100%;
     font-weight: 700;
     line-height: 1.25rem;
-    border: 1px solid #DDDDDD;
+    border: 1px solid $black-text-color;
     font-size: 1rem;
+
     &.error {
-      border: 1px solid red;
+      border: 1px solid $cancel-color;
     }
   }
+
   &__error {
     position: absolute;
     top: 50%;
     right: 15px;
     transform: translateY(-50%);
     border-radius: 100%;
+    background-color: $cancel-color;
     height: 25px;
     width: 25px;
     text-align: center;

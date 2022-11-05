@@ -1,0 +1,10 @@
+.UserItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__avatar {
+    width: 50px;
+    margin-right: 25px;
+  }
+}
